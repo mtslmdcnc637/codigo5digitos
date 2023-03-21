@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar digitos aleatórios</title>
+</head>
+<body>
+    <h1 id="number"></h1>
+    
+    <script>
+        function generateRandomCode() {
+  let code = '';
+  let hasNumber = false;
+
+  const possibleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < 5; i++) {
+    const randomIndex = Math.floor(Math.random() * possibleChars.length);
+    const char = possibleChars.charAt(randomIndex);
+    
+    if (/\d/.test(char) && !hasNumber) {
+      hasNumber = true;
+    } else if (/\d/.test(char) && hasNumber) {
+      i--;
+      continue;
+    }
+
+    code += char;
+  }
+
+  if (!hasNumber) {
+    const randomIndex = Math.floor(Math.random() * code.length);
+    const newChar = Math.floor(Math.random() * 10);
+    code = code.slice(0, randomIndex) + newChar + code.slice(randomIndex + 1);
+  }
+
+  document.getElementById('number').innerText = code
+}
+generateRandomCode()
+
+
+    </script>
+</body>
+</html>
